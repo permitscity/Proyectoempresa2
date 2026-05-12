@@ -5,6 +5,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JT33W7F07X"></script>
+<script src='https://www.google.com/recaptcha/api.js' async defer></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -202,6 +203,31 @@
   /* ANIMATION */
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
+  #backToTop {
+  display: none; /* Se oculta al inicio */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #ff9900; /* Tu naranja de Zoho */
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 50%; /* Redondo */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: all 0.4s ease; /* Transición suave */
+}
+
+#backToTop:hover {
+  background-color: #1a1a1a; /* Cambia a negro al pasar el mouse */
+  transform: rotate(360deg) scale(1.1); /* ¡El giro de 360 grados! */
+}
+
+#backToTop svg {
+  display: block;
+}
 </style>
 </head>
 <body>
@@ -303,6 +329,10 @@
           <div class="lead-field">
             <label>Company / Property Address *</label>
             <input type="text" name="Company" placeholder="123 Main St or Company Name" required>
+          </div>
+          <div class='g-recaptcha' data-sitekey='6LdirOYsAAAAAOTj7y5PaYPWHdASN57yvOa5zmxI' data-theme='light' data-callback='rccallback4721903000020863001' captcha-verified='false' id='recap4721903000020863001'>
+          </div>
+<div id='recapErr4721903000020863001' style='visibility:hidden; color:red; font-size:12px;'>Please verify that you are not a robot.
           </div>
           <button type="submit" id="formsubmit" class="lead-submit formsubmit zcwf_button">Get My Free Consultation →</button>
         </form>
@@ -612,6 +642,14 @@ Ricardo Vilas</p>
     }
   }
 </script>
+  
+  <!-- Botón Volver Arriba -->
+<button onclick="scrollToTop()" id="backToTop" title="Go to top">
+  <svg viewBox="0 0 24 24" width="24" height="24">
+    <path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path>
+  </svg>
+</button>
+
 
 <!-- ZOHO CRM SCRIPTS -->
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js'></script>
@@ -685,6 +723,40 @@ Ricardo Vilas</p>
     });
   });
 </script>
-<script id='wf_anal' src='https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=875a66dcc76654e03a5d5a39ed85a1145585d5e960ba255c80de15339d27883a8f8baa00201139e5368bbd744b1b2c00gid1fc527b8aa47dca7c4655b36aaf0f0e4ffd9b54153c633df1097b04ae0da7d93giddcdfe5d8c852948c395d30c9df0561648ac78e7b2ff6e7cb55872a7d7018b8b9gid6967fb7b6f5669c7bbc35ad8851d70c37ddf06c6ceed7b6a9b5a4fc483ce6b4f&tw=1ad47d1f01f2420020923459d652b49756ef77532b7e6e38bd454eb836f0179a'></script>
+<script id='wf_anal' src='https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=875a66dcc76654e03a5d5a39ed85a1145585d5e960ba255c80de15339d27883a8f8baa00201139e5368bbd744b1b2c00gid1fc527b8aa47dca7c4655b36aaf0f0e4ffd9b54153c633df1097b04ae0da7d93giddcdfe5d8c852948c395d30c9df0561648ac78e7b2ff6e7cb55872a7d7018b8b9gid6967fb7b6f5669c7bbc35ad8851d70c37ddf06c6ceed7b6a9b5a4fc483ce6b4f&tw=1ad47d1f01f2420020923459d652b49756ef77532b7e6e38bd454eb836f0179a'>
+</script>
+<script>
+function rccallback4721903000020863001() {
+   if (document.getElementById('recap4721903000020863001') != undefined) {
+       document.getElementById('recap4721903000020863001').setAttribute('captcha-verified', true);
+   }
+   if (document.getElementById('recapErr4721903000020863001') != undefined) {
+       document.getElementById('recapErr4721903000020863001').style.visibility = 'hidden';
+   }
+}
+
+function checkMandatory4721903000020863001() {
+   var recap = document.getElementById('recap4721903000020863001');
+   if (recap != undefined && recap.getAttribute('captcha-verified') == 'false') {
+       document.getElementById('recapErr4721903000020863001').style.visibility = 'visible';
+       return false;
+   }
+   return true;
+}
+  // Función para mostrar el botón cuando bajas 300px
+window.onscroll = function() {
+  var btn = document.getElementById("backToTop");
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    btn.style.display = "block";
+  } else {
+    btn.style.display = "none";
+  }
+};
+
+// Función para subir suavemente
+function scrollToTop() {
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>  
 </body>
 </html>
