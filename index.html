@@ -228,6 +228,58 @@
 #backToTop svg {
   display: block;
 }
+/* --- OPTIMIZACIÓN DE FORMULARIO DE DOS COLUMNAS --- */
+.form-row-double {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 12px;
+}
+.form-row-double > div {
+  flex: 1;
+}
+@media (max-width: 768px) {
+  .form-row-double {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 0;
+  }
+}
+
+/* --- DISEÑO DEL CARRUSEL DE TESTIMONIOS AUTOMÁTICO --- */
+.testimonial-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.testimonial-slide {
+  display: none;
+  width: 100%;
+  animation: fadeEffect 0.8s ease-in-out;
+}
+.testimonial-slide.active {
+  display: block;
+}
+@keyframes fadeEffect {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.carousel-dots {
+  text-align: center;
+  margin-top: 25px;
+}
+.dot {
+  cursor: pointer;
+  height: 12px;
+  width: 12px;
+  margin: 0 5px;
+  background-color: #555;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+.dot.active, .dot:hover {
+  background-color: #ff9900;
+}
 </style>
 </head>
 <body>
@@ -310,25 +362,34 @@
           <input type='text' style='display:none;' name='Lead_Source' value='Página-Web'>
           <input type='text' style='display:none;' name='Industry' value='TRAMITE DE PERMISOS ONLY'>    
 
-          <div class="lead-field">
+                    <!-- FILA 1: NOMBRES JUNTOS -->
+          <div class="form-row-double">
+            <div class="lead-field">
             <label>First Name *</label>
             <input type="text" name="First Name" placeholder="John" required>
-          </div>
-          <div class="lead-field">
+            </div>
+            <div class="lead-field">
             <label>Last Name *</label>
             <input type="text" name="Last Name" placeholder="Smith" required>
+            </div>
           </div>
-          <div class="lead-field">
-            <label>Email Address</label>
-            <input type="email" ftype="email" name="Email" placeholder="john@email.com">
-          </div>
-          <div class="lead-field">
+
+          <!-- FILA 2: CONTACTO JUNTO -->
+            <div class="form-row-double">
+            <div class="lead-field">
+            <label>Email Address *</label>
+            <input type="email" ftype="email" name="Email" placeholder="john@email.com" required>
+            </div>
+            <div class="lead-field">
             <label>Phone Number</label>
             <input type="tel" name="Phone" placeholder="(786) 000-0000">
+            </div>
           </div>
-          <div class="lead-field">
+
+          <!-- FILA 3: DIRECCIÓN (OCUPA TODO EL ANCHO) -->
+            <div class="lead-field" style="margin-bottom: 15px;">
             <label>Company / Property Address *</label>
-            <input type="text" name="Company" placeholder="123 Main St or Company Name" required>
+            <input type="text" name="Company" placeholder="123 Main St or Company Name" required style="width: 100%; box-sizing: border-box;">
           </div>
           <div class='g-recaptcha' data-sitekey='6LdirOYsAAAAAOTj7y5PaYPWHdASN57yvOa5zmxI' data-theme='light' data-callback='rccallback4721903000020863001' captcha-verified='false' id='recap4721903000020863001'>
           </div>
@@ -506,44 +567,99 @@
       <h2 class="section-title">Real Results. Real Clients.</h2>
       <div class="section-divider" style="margin:14px auto 0;"></div>
     </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card reveal">
-        <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-        <p class="testimonial-text">"I had an open violation on my Miami Gardens home for a fence and shed. I couldn't sleep thinking about the daily fines. Need A General Contractor handled all the paperwork with the city, and within weeks my record was clean. "</p>
-        <div class="testimonial-author">
-          <div class="author-avatar"><img src="..." alt="Client photo" onerror="this.parentElement.innerHTML='Photo'"></div>
-          <div>
-            <p class="author-name">
-Maria Perez</p>
-            <p class="author-role">Homeowner — Miami, FL</p>
+<!-- --- INICIO DEL CARRUSEL DE TESTIMONIOS --- -->
+    <div class="testimonial-carousel">
+      
+<!-- GRUPO 1: Tus 3 testimonios actuales -->
+      <div class="testimonial-slide active">
+        <div class="testimonials-grid">
+          <!-- Testimonio 1 -->
+          <div class="testimonial-card reveal">
+            <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+            <p class="testimonial-text">"I had an open violation on my Miami Gardens home for a fence and shed. I couldn't sleep thinking about the daily fines. Need A General Contractor handled all the paperwork with the city, and within weeks my record was clean."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"><img src="..." alt="Client photo" onerror="this.parentElement.innerHTML='Photo'"></div>
+              <div>
+                <p class="author-name">Maria Perez</p>
+                <p class="author-role">Homeowner — Miami, FL</p>
+              </div>
+            </div>
+          </div>
+          <!-- Testimonio 2 -->
+          <div class="testimonial-card reveal" style="transition-delay:0.1s">
+            <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+            <p class="testimonial-text">"I needed to legalize an extension to my property in order to sell it. Others told me it would take a year, but they expedited the process with Miami-Dade and we were able to close in 3 months. Complete transparency regarding costs."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"><img src="..." alt="Client photo" onerror="this.parentElement.innerHTML='Photo'"></div>
+              <div>
+                <p class="author-name">Sandra Gomez</p>
+                <p class="author-role">Real Estate Investor — Hialeah</p>
+              </div>
+            </div>
+          </div>
+          <!-- Testimonio 3 -->
+          <div class="testimonial-card reveal" style="transition-delay:0.2s">
+            <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+            <p class="testimonial-text">"I bought a duplex in Hialeah to remodel, and the permitting process was a nightmare. Their team prepared the architectural plans and handled the electrical and plumbing inspections flawlessly. They are true professionals who know what they're doing."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"><img src="..." alt="Client photo" onerror="this.parentElement.innerHTML='Photo'"></div>
+              <div>
+                <p class="author-name">Ricardo Vilas</p>
+                <p class="author-role">General Contractor — Bay Harbor Islands</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="testimonial-card reveal" style="transition-delay:0.1s">
-        <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-        <p class="testimonial-text">"I needed to legalize an extension to my property in order to sell it. Others told me it would take a year, but they expedited the process with Miami-Dade and we were able to close in 3 months. Complete transparency regarding costs."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar"><img src="..." alt="Client photo" onerror="this.parentElement.innerHTML='Photo'"></div>
-          <div>
-            <p class="author-name">Sandra Gomez</p>
-            <p class="author-role">Real Estate Investor — Hialeah</p>
+
+      <!-- GRUPO 2: Los 3 testimonios nuevos (Shed, Addition y Fence) -->
+      <div class="testimonial-slide">
+        <div class="testimonials-grid">
+          <!-- Testimonio 4 -->
+          <div class="testimonial-card reveal">
+            <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+            <p class="testimonial-text">"The city put a violation code on my backyard storage because the previous owner built a shed without plans. This team drafted the structural layouts, submitted the retroactive permit, and passed the final inspection effortlessly."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"><img src="..." alt="Client photo" onerror="this.parentElement.innerHTML='Photo'"></div>
+              <div>
+                <p class="author-name">Carlos Mendez</p>
+                <p class="author-role">Property Owner — Kendall, FL</p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="testimonial-card reveal" style="transition-delay:0.2s">
-        <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-        <p class="testimonial-text">"I bought a duplex in Hialeah to remodel, and the permitting process was a nightmare. Their team prepared the architectural plans and handled the electrical and plumbing inspections flawlessly. They are true professionals who know what they're doing."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar"><img src="..." alt="Client photo" onerror="this.parentElement.innerHTML='Photo'"></div>
-          <div>
-            <p class="author-name">
-Ricardo Vilas</p>
-            <p class="author-role">General Contractor — Bay Harbor Islands</p>
+          <!-- Testimonio 5 -->
+          <div class="testimonial-card reveal" style="transition-delay:0.1s">
+            <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+            <p class="testimonial-text">"Adding a new master bedroom to our house seemed impossible with all the regulations. They managed the architectural blueprints, MEP engineering, and city approvals seamlessly. Highly recommend their project management!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"><img src="..." alt="Client photo" onerror="this.parentElement.innerHTML='Photo'"></div>
+              <div>
+                <p class="author-name">Jessica Taylor</p>
+                <p class="author-role">Homeowner — Fort Lauderdale, FL</p>
+              </div>
+            </div>
+          </div>
+          <!-- Testimonio 6 -->
+          <div class="testimonial-card reveal" style="transition-delay:0.2s">
+            <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+            <p class="testimonial-text">"We needed a customized privacy fence permit approved quickly before our homeowner association fines kicked in. They handled the zoning checks and engineering surveys in record time. Excellent communication throughout."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"><img src="..." alt="Client photo" onerror="this.parentElement.innerHTML='Photo'"></div>
+              <div>
+                <p class="author-name">David Smith</p>
+                <p class="author-role">Residential Client — Doral, FL</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+
+    <!-- Indicadores puntitos (Dots) abajo -->
+    <div class="carousel-dots">
+      <span class="dot active" onclick="currentSlide(0)"></span>
+      <span class="dot" onclick="currentSlide(1)"></span>
+    </div>
 </section>
 
 <!-- CTA -->
@@ -756,6 +872,43 @@ window.onscroll = function() {
 // Función para subir suavemente
 function scrollToTop() {
   window.scrollTo({top: 0, behavior: 'smooth'});
+}
+// --- MOTOR DEL CARRUSEL DE TESTIMONIOS (6 SEGUNDOS) ---
+let currentSlideIndex = 0;
+const slides = document.querySelectorAll('.testimonial-slide');
+const dots = document.querySelectorAll('.dot');
+const slideInterval = 6000; // 6000 milisegundos = 6 segundos
+
+function showSlides(index) {
+  if (slides.length === 0) return;
+  if (index >= slides.length) { currentSlideIndex = 0; }
+  if (index < 0) { currentSlideIndex = slides.length - 1; }
+  
+  slides.forEach(slide => slide.classList.remove('active'));
+  dots.forEach(dot => dot.classList.remove('active'));
+  
+  slides[currentSlideIndex].classList.add('active');
+  if (dots[currentSlideIndex]) {
+    dots[currentSlideIndex].classList.add('active');
+  }
+}
+
+function nextSlide() {
+  currentSlideIndex++;
+  showSlides(currentSlideIndex);
+}
+
+function currentSlide(index) {
+  currentSlideIndex = index;
+  showSlides(currentSlideIndex);
+  resetTimer();
+}
+
+let autoSlideTimer = setInterval(nextSlide, slideInterval);
+
+function resetTimer() {
+  clearInterval(autoSlideTimer);
+  autoSlideTimer = setInterval(nextSlide, slideInterval);
 }
 </script>  
 </body>
